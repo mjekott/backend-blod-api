@@ -6,6 +6,9 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+//routes declaration
+const blogRoutes = require('./routes/blog');
+
 //app
 const app = express();
 
@@ -30,10 +33,8 @@ if (process.env.NODE_ENV === 'production') {
   app.use(cors({ origin: `${process.env.CLIENT_URL}` }));
 }
 
-//routes
-app.get('/api', (req, res, next) => {
-  res.json({ message: '💣' });
-});
+//routes middlewares
+app.use('/api', blogRoutes);
 
 //port
 const port = process.env.PORT || 8000;
