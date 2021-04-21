@@ -9,6 +9,7 @@ require('dotenv').config();
 //routes declaration
 const blogRoutes = require('./routes/blog');
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 
 //app
 const app = express();
@@ -30,13 +31,14 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 //applying cors
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'developement') {
   app.use(cors({ origin: `${process.env.CLIENT_URL}` }));
 }
 
 //routes middlewares
 app.use('/api/blog', blogRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
 
 //port
 const port = process.env.PORT || 8000;
